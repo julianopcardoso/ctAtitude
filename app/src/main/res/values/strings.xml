@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">CT Atitude</string>
+    <string name="exercicios">Exercícios</string>
+    <string name="treinos">Treinos</string>
+    <string name="timer">Timer</string>
+    <string name="ct_atitude">CT Atitude</string>
+    <string name="pesquisar">Pesquisar</string>
+    <string name="adicionar">Adicionar</string>
+    <string name="novo">Novo</string>
+    <string name="salvar">Salvar</string>
+    <string name="nome_exercicio_cadastro">Exercício:</string>
+    <string name="descricao_exercicio_Cadastro">Descrição:</string>
+    <string name="repeticoes_exercio_cadastro">Repetições:</string>
+    <string name="peso_exercicio_cadastro">Peso:</string>
+    <string name="distancia_exercicio_cadastro">Distância:</string>
+    <string name="tempo_exercicios_cadastro">Tempo:</string>
+    <string name="nome_exercicio_hint">Digite o nome do Exercício</string>
+    <string name="descricao_exercio_hint">Digite a descrição do exercício</string>
+    <string name="pesquisar_hint">Digite a pesquisa...</string>
+</resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/pesquisar"
+        android:icon="@drawable/ic_search"
+        android:title="@string/pesquisar"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="always|collapseActionView"
+        android:tooltipText="@string/pesquisar"
+        android:titleCondensed="@string/pesquisar"
+        />
+
+    <item
+        android:id="@+id/novo"
+        android:icon="@drawable/ic_add"
+        android:title="@string/novo"
+        app:showAsAction="always" />
+</menu>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.MainActivity">
+
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/textNomeExercicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nome_exercicio_cadastro"
+            android:layout_marginTop="80dp"
+            android:textSize="32sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp" />
+        <EditText
+            android:inputType="text"
+            android:id="@+id/editTextNomeExercicio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/nome_exercicio_hint"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_below="@id/textNomeExercicio"
+            android:maxLength="100"
+            android:gravity="top|left"
+            tools:ignore="RtlHardcoded"
+            />
+
+        <TextView
+            android:id="@+id/textDescricaoExercicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/descricao_exercicio_Cadastro"
+            android:layout_below="@id/editTextNomeExercicio"
+            android:textSize="32sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp" />
+        <EditText
+            android:id="@+id/editTextDescricao"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/descricao_exercio_hint"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_below="@id/textDescricaoExercicio"
+            android:maxLength="500"
+            android:lines="10"
+            android:minLines="5"
+            android:gravity="top|left"
+            android:maxLines="15"
+            android:scrollHorizontally="false"
+            android:scrollbars="vertical"
+            tools:ignore="RtlHardcoded" />
+        <TextView
+            android:id="@+id/textRepeticoes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/repeticoes_exercio_cadastro"
+            android:layout_below="@id/editTextDescricao"
+            android:textSize="18sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp" />
+        <Switch
+            android:id="@+id/switchRepeticoes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/textRepeticoes"
+            android:layout_below="@id/editTextDescricao"
+            android:layout_alignBaseline="@id/textRepeticoes"
+            android:layout_marginRight="16dp"
+            android:textSize="18sp"
+            tools:ignore="UseSwitchCompatOrMaterialXml"
+            android:layout_toEndOf="@id/textRepeticoes"
+            android:layout_marginEnd="16dp" />
+
+        <TextView
+            android:id="@+id/textPeso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/peso_exercicio_cadastro"
+            android:layout_below="@id/textRepeticoes"
+            android:textSize="18sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp" />
+        <Switch
+            android:id="@+id/switchPeso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/textPeso"
+            android:layout_below="@id/switchRepeticoes"
+            android:layout_alignBaseline="@id/textPeso"
+            android:layout_marginRight="16dp"
+            android:textSize="18sp"
+            tools:ignore="UseSwitchCompatOrMaterialXml"
+            android:layout_toEndOf="@id/textPeso"
+            android:layout_marginEnd="16dp" />
+
+        <TextView
+            android:id="@+id/textDistancia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/distancia_exercicio_cadastro"
+            android:layout_below="@id/textPeso"
+            android:textSize="18sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp" />
+        <Switch
+            android:id="@+id/switchDistancia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/textDistancia"
+            android:layout_below="@id/editTextDescricao"
+            android:layout_alignBaseline="@id/textDistancia"
+            android:layout_marginRight="16dp"
+            android:textSize="18sp"
+            tools:ignore="UseSwitchCompatOrMaterialXml"
+            android:layout_marginEnd="16dp"
+            android:layout_toEndOf="@id/textDistancia" />
+        <TextView
+            android:id="@+id/textTempo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tempo_exercicios_cadastro"
+            android:layout_below="@id/textDistancia"
+            android:textSize="18sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp" />
+        <Switch
+            android:id="@+id/switchTempo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/textTempo"
+            android:layout_below="@id/switchDistancia"
+            android:layout_alignBaseline="@id/textTempo"
+            android:layout_marginRight="16dp"
+            android:textSize="18sp"
+            tools:ignore="UseSwitchCompatOrMaterialXml"
+            android:layout_toEndOf="@id/textTempo"
+            android:layout_marginEnd="16dp" />
+
+        <Button
+            android:id="@+id/buttonSalvar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/salvar"
+            android:layout_below="@id/textTempo"
+            android:backgroundTint="@color/green_ct"
+            android:layout_marginTop="42dp"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="16dp"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+</RelativeLayout>
