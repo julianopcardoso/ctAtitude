@@ -67,6 +67,4 @@ public class Exercicio implements Serializable {
     public void setTempo(String tempo) {
         this.tempo = tempo;
     }
-
-
 }
