@@ -10,6 +10,60 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CTAtitude">
         <activity
+            android:name=".view.TreinosEtapaExercicioCasdastroActivity"
+            android:parentActivityName=".view.TreinosEtapaCasdastroActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.TreinosEtapaCasdastroActivity" />
+        </activity>
+        <activity
+            android:name=".view.TreinosEtapaCasdastroActivity" android:launchMode="singleTop"
+            android:parentActivityName=".view.TreinosCasdastroActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.TreinosCasdastroActivity" />
+        </activity>
+        <activity
+            android:name=".view.TreinosCasdastroActivity" android:launchMode="singleTop"
+            android:parentActivityName=".view.TreinosListaActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.TreinosListaActivity" />
+        </activity>
+        <activity
+            android:name=".view.TreinosListaActivity"
+            android:parentActivityName=".view.MainActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.MainActivity" />
+        </activity>
+        <activity
+            android:name=".view.TimersListaActivity"
+            android:parentActivityName=".view.MainActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.MainActivity" />
+        </activity>
+        <activity
+            android:name=".view.TimerActivity"
+            android:parentActivityName=".view.TimersListaActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.TimersListaActivity" />
+        </activity>
+        <activity
             android:name=".view.ExerciciosCasdastroActivity"
             android:parentActivityName=".view.ExerciciosListaActivity">
 

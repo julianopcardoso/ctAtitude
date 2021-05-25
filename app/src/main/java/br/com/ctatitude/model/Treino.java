@@ -4,50 +4,123 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Classe Treino
+ */
 public class Treino implements Serializable {
 
-    private int id;
+    private Integer id;
     private String nome;
-    private int round;
-    private Date descanso;
+    private Integer round;
+    private Integer descanso;
+    private Integer duracao;
     private List<EtapaTreino> etapasTreinos;
 
-    public int getId() {
+
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
+    public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * Gets nome.
+     *
+     * @return the nome
+     */
     public String getNome() {
         return nome;
     }
 
+    /**
+     * Sets nome.
+     *
+     * @param nome the nome
+     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public int getRound() {
+    /**
+     * Gets round.
+     *
+     * @return the round
+     */
+    public Integer getRound() {
         return round;
     }
 
-    public void setRound(int round) {
+    /**
+     * Sets round.
+     *
+     * @param round the round
+     */
+    public void setRound(Integer round) {
         this.round = round;
     }
 
-    public Date getDescanso() {
+    /**
+     * Gets descanso.
+     *
+     * @return the descanso
+     */
+    public Integer getDescanso() {
         return descanso;
     }
 
-    public void setDescanso(Date descanso) {
+    /**
+     * Sets descanso.
+     *
+     * @param descanso the descanso
+     */
+    public void setDescanso(Integer descanso) {
         this.descanso = descanso;
     }
 
+    /**
+     * Gets duracao.
+     *
+     * @return the duracao
+     */
+    public Integer getDuracao() {
+        return duracao;
+    }
+
+    /**
+     * Sets duracao.
+     *
+     * @param duracao the duracao
+     */
+    public void setDuracao(Integer duracao) {
+        this.duracao = duracao;
+    }
+
+    /**
+     * Gets etapas treinos.
+     *
+     * @return the etapas treinos
+     */
     public List<EtapaTreino> getEtapasTreinos() {
         return etapasTreinos;
     }
 
+    /**
+     * Sets etapas treinos.
+     *
+     * @param etapasTreinos the etapas treinos
+     */
     public void setEtapasTreinos(List<EtapaTreino> etapasTreinos) {
         this.etapasTreinos = etapasTreinos;
     }

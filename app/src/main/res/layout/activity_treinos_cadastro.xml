@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.MainActivity">
+
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textTotalTreino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            android:fontFamily="@font/coda"
+            android:gravity="top"
+            android:text="@string/timer_inicial"
+            android:textSize="72sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textNomeTreino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textTotalTreino"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:gravity="top"
+            android:text="@string/nome"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editTextNomeTreino"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textNomeTreino"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/edittext_bg"
+            android:gravity="top|left"
+            android:hint="@string/nome_treino_hint"
+            android:inputType="text"
+            android:maxLength="100"
+            android:padding="5dp"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/textRounds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editTextNomeTreino"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="12dp"
+            android:gravity="top"
+            android:text="@string/rounds"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/imageButtonMinus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editTextNomeTreino"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_toEndOf="@id/textRounds"
+            android:layout_toRightOf="@id/textRounds"
+            android:background="@drawable/selectable_button_bg"
+            android:gravity="top"
+            android:src="@drawable/ic_remove_circle"
+            tools:ignore="UnknownId" />
+
+        <EditText
+            android:id="@+id/editTextRounds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editTextNomeTreino"
+            android:layout_alignStart="@id/editTextDescanso"
+            android:layout_alignLeft="@id/editTextDescanso"
+            android:layout_marginTop="12dp"
+            android:layout_toRightOf="@id/imageButtonMinus"
+            android:background="@drawable/edittext_bg"
+            android:clickable="false"
+            android:focusable="false"
+            android:gravity="top|left"
+            android:inputType="number"
+            android:maxLength="02"
+            android:padding="5dp"
+            android:text="@string/valor_round"
+            android:textSize="18sp"
+            tools:ignore="RtlHardcoded" />
+
+        <ImageButton
+            android:id="@+id/imageButtonPlus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editTextNomeTreino"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="16dp"
+            android:layout_toEndOf="@id/editTextRounds"
+            android:layout_toRightOf="@id/editTextRounds"
+            android:background="@drawable/selectable_button_bg"
+            android:gravity="top"
+            android:src="@drawable/ic_add_circle" />
+
+        <TextView
+            android:id="@+id/textDescanso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textRounds"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:gravity="top"
+            android:text="@string/descanso"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editTextDescanso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textRounds"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_toEndOf="@id/textDescanso"
+            android:layout_toRightOf="@id/textDescanso"
+            android:background="@drawable/selectable_edittext_bg"
+            android:focusable="false"
+            android:gravity="top|left"
+            android:hint="@string/duracao_inicial"
+            android:inputType="text"
+            android:maxLength="05"
+            android:padding="5dp"
+            android:text="@string/duracao_inicial"
+            tools:ignore="RtlHardcoded" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_etapas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textDescanso"
+            android:layout_marginTop="16dp"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_etapa"
+            />
+
+        <Button
+            android:id="@+id/buttonAdicionarEtapa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textRounds"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+            android:layout_marginTop="5dp"
+            android:layout_alignParentRight="true"
+            android:text="@string/adicionar_etapa"
+            app:icon="@drawable/ic_add_circle"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp" />
+
+        <Button
+            android:id="@+id/buttonSalvar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="42dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/green_ct"
+            android:text="@string/salvar" />
+    </RelativeLayout>
+
+</RelativeLayout>

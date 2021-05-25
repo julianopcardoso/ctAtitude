@@ -12,56 +12,57 @@ import br.com.ctatitude.db.DatabaseConnection;
 import br.com.ctatitude.model.Etapa;
 import br.com.ctatitude.model.Exercicio;
 
+/**
+ * Classe {@link EtapaDAO}
+ */
 public class EtapaDAO {
-    private DatabaseConnection dbConnection;
-    private SQLiteDatabase db;
+    private final DatabaseConnection dbConnection;
+    private final SQLiteDatabase db;
 
+    /**
+     * Construtor
+     * @param context
+     */
     public EtapaDAO(Context context) {
         dbConnection = new DatabaseConnection(context);
         db = dbConnection.getWritableDatabase();
     }
 
-    public boolean inserir(Etapa etapa) {
+    /**
+     * Inserir
+     * @param etapa
+     * @return long
+     */
+    public long inserir(Etapa etapa) {
 
-        /*ContentValues values = new ContentValues();
-        values.put("NOME", exercicio.getNome().toString());
-        values.put("DESCRICAO", exercicio.getDescricao().toString());
-        values.put("PESO", exercicio.getPeso().toString());
-        values.put("REPETICAO", exercicio.getRepeticoes().toString());
-        values.put("DISTANCIA", exercicio.getDistancia().toString());
-        values.put("TEMPO", exercicio.getTempo().toString());
+        ContentValues values = new ContentValues();
+        values.put("DURACAO", etapa.getDuracao());
+        values.put("DESCANSO", etapa.getDescanso());
+        values.put("ROUND", etapa.getRound());
 
-        return db.insert("EXERCICIO", null, values) > 0;*/
-        return true;
+        return db.insert("ETAPA", null, values);
     }
 
+    /**
+     * Alterar
+     * @param etapa
+     * @return boolean
+     */
     public boolean alterar(Etapa etapa) {
+        ContentValues values = new ContentValues();
+        values.put("DURACAO", etapa.getDuracao());
+        values.put("DESCANSO", etapa.getDescanso());
+        values.put("ROUND", etapa.getRound());
 
-        //return db.update("EXERCICIO", values, "ID=?", new String[]{String.valueOf(exercicio.getId())}) > 0;
-        return true;
+        return db.update("ETAPA", values, "ID=?", new String[]{String.valueOf(etapa.getId())}) > 0;
     }
 
+    /**
+     * Excluir
+     * @param etapa
+     * @return boolean
+     */
     public boolean excluir(Etapa etapa) {
-        //return db.delete("EXERCICIO", "ID=?", new String[]{String.valueOf(exercicio.getId())}) > 0;
-        return true;
-    }
-
-    public List<Etapa> listar() {
-        /*List<Etapa> etapas = new ArrayList<>();
-        Cursor cursor = db.query("EXERCICIO", new String[]{"ID", "NOME", "DESCRICAO", "PESO", "REPETICAO", "DISTANCIA", "TEMPO"},
-                null, null, null, null, "NOME");
-        while (cursor.moveToNext()) {
-            Exercicio exercicio = new Exercicio();
-            exercicio.setId(cursor.getInt(0));
-            exercicio.setNome(cursor.getString(1));
-            exercicio.setDescricao(cursor.getString(2));
-            exercicio.setPeso(cursor.getString(3));
-            exercicio.setRepeticoes(cursor.getString(4));
-            exercicio.setDistancia(cursor.getString(5));
-            exercicio.setTempo(cursor.getString(6));
-            exercicios.add(exercicio);
-        }
-        return exercicios;*/
-        return null;
+        return db.delete("ETAPA", "ID=?", new String[]{String.valueOf(etapa.getId())}) > 0;
     }
 }

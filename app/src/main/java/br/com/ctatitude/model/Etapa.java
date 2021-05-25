@@ -5,51 +5,104 @@ import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Classe Etapa
+ */
 public class Etapa implements Serializable {
 
-    private int id;
+    private Integer id;
     private List<ExercicioEtapa> exerciciosEtapa;
-    private Date duracao;
-    private Date descanso;
-    private int round;
+    private Integer duracao;
+    private Integer descanso;
+    private Integer round;
 
-    public int getId() {
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
+    public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * Gets exercicios etapa.
+     *
+     * @return the exercicios etapa
+     */
     public List<ExercicioEtapa> getExerciciosEtapa() {
         return exerciciosEtapa;
     }
 
+    /**
+     * Sets exercicios etapa.
+     *
+     * @param exerciciosEtapa the exercicios etapa
+     */
     public void setExerciciosEtapa(List<ExercicioEtapa> exerciciosEtapa) {
         this.exerciciosEtapa = exerciciosEtapa;
     }
 
-    public Date getDuracao() {
+    /**
+     * Gets duracao.
+     *
+     * @return the duracao
+     */
+    public Integer getDuracao() {
         return duracao;
     }
 
-    public void setDuracao(Date duracao) {
+    /**
+     * Sets duracao.
+     *
+     * @param duracao the duracao
+     */
+    public void setDuracao(Integer duracao) {
         this.duracao = duracao;
     }
 
-    public Date getDescanso() {
+    /**
+     * Gets descanso.
+     *
+     * @return the descanso
+     */
+    public Integer getDescanso() {
         return descanso;
     }
 
-    public void setDescanso(Date descanso) {
+    /**
+     * Sets descanso.
+     *
+     * @param descanso the descanso
+     */
+    public void setDescanso(Integer descanso) {
         this.descanso = descanso;
     }
 
-    public int getRound() {
+    /**
+     * Gets round.
+     *
+     * @return the round
+     */
+    public Integer getRound() {
         return round;
     }
 
-    public void setRound(int round) {
+    /**
+     * Sets round.
+     *
+     * @param round the round
+     */
+    public void setRound(Integer round) {
         this.round = round;
     }
 }

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.MainActivity">
+
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textNomeExercicioEtapa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nome_exercicio"
+            android:layout_marginTop="80dp"
+            android:textSize="24sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold"/>
+
+        <AutoCompleteTextView
+            android:id="@+id/editTextNomeExercicioEtapa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/selecione_exercicio"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_below="@id/textNomeExercicioEtapa"
+            android:maxLength="100"
+            android:gravity="top|left"
+            android:background="@drawable/edittext_bg"
+            android:padding="5dp"
+            android:completionThreshold="1"
+            android:completionHint="@string/selecione_exercicio"
+            />
+
+
+        <TextView
+            android:id="@+id/textQtdeRepeticoes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/qtde_repeticoes"
+            android:layout_marginTop="16dp"
+            android:textSize="24sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold"
+            android:layout_below="@id/editTextNomeExercicioEtapa"/>
+
+        <EditText
+            android:inputType="number"
+            android:id="@+id/editTextQtdeRepeticoes"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_toRightOf="@id/textQtdeRepeticoes"
+            android:layout_below="@id/editTextNomeExercicioEtapa"
+            android:layout_marginTop="16dp"
+            android:maxLength="04"
+            android:gravity="top|left"
+            tools:ignore="RtlHardcoded"
+            android:background="@drawable/edittext_bg"
+            android:padding="5dp"
+            />
+
+        <TextView
+            android:id="@+id/textPeso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/peso_exercicio_etapa"
+            android:layout_marginTop="16dp"
+            android:textSize="24sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold"
+            android:layout_below="@id/textQtdeRepeticoes"/>
+
+        <EditText
+            android:inputType="number"
+            android:id="@+id/editTextPesoMasc"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="8dp"
+            android:layout_toRightOf="@id/textPeso"
+            android:layout_below="@id/textQtdeRepeticoes"
+            android:layout_marginTop="16dp"
+            android:maxLength="04"
+            android:gravity="top|left"
+            tools:ignore="RtlHardcoded"
+            android:background="@drawable/edittext_bg"
+            android:padding="5dp"
+            />
+
+        <TextView
+            android:id="@+id/textPesoMasc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="masc"
+            android:layout_marginTop="24dp"
+            android:textSize="14sp"
+            android:layout_below="@id/textQtdeRepeticoes"
+            android:layout_toRightOf="@id/editTextPesoMasc"/>
+
+        <EditText
+            android:inputType="number"
+            android:id="@+id/editTextPesoFem"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_toRightOf="@id/textPesoMasc"
+            android:layout_below="@id/textQtdeRepeticoes"
+            android:layout_marginTop="16dp"
+            android:maxLength="04"
+            android:gravity="top|left"
+            tools:ignore="RtlHardcoded"
+            android:background="@drawable/edittext_bg"
+            android:padding="5dp"
+
+            />
+
+        <TextView
+            android:id="@+id/textPesoFem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fem"
+            android:layout_marginTop="24dp"
+            android:textSize="14sp"
+            android:layout_below="@id/textQtdeRepeticoes"
+            android:layout_toRightOf="@id/editTextPesoFem"
+            android:layout_marginRight="16dp"/>
+
+
+        <TextView
+            android:id="@+id/textDistancia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/distancia_exercicio_metros"
+            android:layout_marginTop="16dp"
+            android:textSize="24sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold"
+            android:layout_below="@id/textPeso"/>
+
+        <EditText
+            android:inputType="number"
+            android:id="@+id/editTextDistancia"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@id/textDistancia"
+            android:layout_below="@id/textPeso"
+            android:layout_marginTop="16dp"
+            android:maxLength="04"
+            android:gravity="top|left"
+            tools:ignore="RtlHardcoded"
+            android:background="@drawable/edittext_bg"
+            android:padding="5dp"
+            />
+
+        <TextView
+            android:gravity="top"
+            android:id="@+id/textTempoExercicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tempo"
+            android:layout_below="@id/textDistancia"
+            android:textSize="24sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold" />
+        <EditText
+            android:inputType="text"
+            android:id="@+id/editTextTempoExercicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/duracao_inicial"
+            android:text="@string/duracao_inicial"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_below="@id/textDistancia"
+            android:maxLength="05"
+            android:gravity="top|left"
+            tools:ignore="RtlHardcoded"
+            android:background="@drawable/selectable_edittext_bg"
+            android:layout_marginTop="16dp"
+            android:padding="5dp"
+            android:layout_toRightOf="@id/textTempoExercicio"
+            android:focusable="false"
+            />
+
+        <TextView
+            android:gravity="top"
+            android:id="@+id/textMaximo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/maximo"
+            android:layout_below="@id/textTempoExercicio"
+            android:textSize="16sp"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentRight="true"/>
+
+        <Button
+            android:id="@+id/buttonAdicionarExercicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/adicionar"
+            android:backgroundTint="@color/green_ct"
+            android:layout_marginTop="42dp"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+</RelativeLayout>

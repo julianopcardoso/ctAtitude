@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/actor</item>
         <item>@font/alegreya_sans_sc</item>
         <item>@font/alex_brush</item>
         <item>@font/allerta</item>
+        <item>@font/amiko</item>
         <item>@font/audiowide</item>
         <item>@font/basic</item>
         <item>@font/bungee</item>
+        <item>@font/cantarell</item>
         <item>@font/coda</item>
         <item>@font/convergence</item>
+        <item>@font/days_one</item>
         <item>@font/doppio_one</item>
+        <item>@font/droid_sans_mono</item>
+        <item>@font/exo_2_thin</item>
+        <item>@font/graduate</item>
         <item>@font/iceberg</item>
         <item>@font/krona_one</item>
         <item>@font/lalezar</item>
@@ -19,5 +26,6 @@
         <item>@font/numans</item>
         <item>@font/quantico</item>
         <item>@font/spinnaker</item>
+        <item>@font/walter_turncoat</item>
     </array>
 </resources>

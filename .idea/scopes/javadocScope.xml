@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="javadocScope" pattern="file:*java&amp;&amp;!file:R.java&amp;&amp;!file:*_.java||file:*strings.xml||file:*dimes.xml||file:*styles.xml||file:*attrs.xml||file:*colors.xml||file:*layout/*xml&amp;&amp;!file:*build/*xml" />
+</component>

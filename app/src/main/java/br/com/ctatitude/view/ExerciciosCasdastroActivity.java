@@ -18,15 +18,17 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import br.com.ctatitude.R;
 import br.com.ctatitude.model.Exercicio;
 
+/**
+ * Classe ExerciciosCasdastroActivity
+ */
 public class ExerciciosCasdastroActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText nome;
-    private EditText descricao;
+    private EditText nomeExercicio;
+    private EditText descricaoExercicio;
+
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch repeticoes;
     @SuppressLint("UseSwitchCompatOrMaterialCode")
@@ -35,19 +37,40 @@ public class ExerciciosCasdastroActivity extends AppCompatActivity implements Vi
     private Switch distancia;
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch tempo;
-    private ExercicioDAO dao;
 
+    private ExercicioDAO exercicioDAO;
     private Exercicio exercicioEditado = null;
     private boolean acaoAlteracao = false;
 
+    /**
+     * onCreate
+     * @param savedInstanceState
+     */
     @SuppressLint("WrongViewCast")
     @Override
-    protected void onCreate(Bundle savedInstanceState)  {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercicios_cadastro);
 
-        nome = findViewById(R.id.editTextNomeExercicio);
-        descricao = findViewById(R.id.editTextDescricao);
+        //Set toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.exercicios);
+        setSupportActionBar(toolbar);
+
+        //Set up button
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+
+        //Set salvar button
+        Button salvarExercicio = findViewById(R.id.buttonSalvar);
+        salvarExercicio.setOnClickListener(this);
+
+        //Set conexão banco de dados
+        exercicioDAO = new ExercicioDAO(this);
+
+        //Set campos da tela
+        nomeExercicio = findViewById(R.id.editTextNomeExercicio);
+        descricaoExercicio = findViewById(R.id.editTextDescricao);
         repeticoes = findViewById(R.id.switchRepeticoes);
         peso = findViewById(R.id.switchPeso);
         distancia = findViewById(R.id.switchDistancia);
@@ -55,54 +78,30 @@ public class ExerciciosCasdastroActivity extends AppCompatActivity implements Vi
 
         acaoAlteracao = false;
 
+        //Alteração de Exercício. Serealiza parâmetros da tela de lista
         Intent intent = getIntent();
-        if(intent.hasExtra("exercicio")){
+        if (intent.hasExtra("exercicio")) {
             acaoAlteracao = true;
             exercicioEditado = (Exercicio) intent.getSerializableExtra("exercicio");
-            nome.setText(exercicioEditado.getNome());
-            descricao.setText(exercicioEditado.getDescricao());
 
-            if(exercicioEditado.getRepeticoes().equals(EnumSimNao.SIM.getValor())){
-               repeticoes.setChecked(true);
-            }else{
-                repeticoes.setChecked(false);
-            }
-
-            if(exercicioEditado.getDistancia().equals(EnumSimNao.SIM.getValor())){
-                distancia.setChecked(true);
-            }else{
-                distancia.setChecked(false);
-            }
-
-            if(exercicioEditado.getPeso().equals(EnumSimNao.SIM.getValor())){
-                peso.setChecked(true);
-            }else{
-                peso.setChecked(false);
-            }
-
-            if(exercicioEditado.getTempo().equals(EnumSimNao.SIM.getValor())){
-                tempo.setChecked(true);
-            }else{
-                tempo.setChecked(false);
-            }
+            nomeExercicio.setText(exercicioEditado.getNome());
+            descricaoExercicio.setText(exercicioEditado.getDescricao());
+            repeticoes.setChecked(exercicioEditado.getRepeticoes().equals(EnumSimNao.SIM.getValor()));
+            distancia.setChecked(exercicioEditado.getDistancia().equals(EnumSimNao.SIM.getValor()));
+            peso.setChecked(exercicioEditado.getPeso().equals(EnumSimNao.SIM.getValor()));
+            tempo.setChecked(exercicioEditado.getTempo().equals(EnumSimNao.SIM.getValor()));
         }
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.exercicios);
-        setSupportActionBar(toolbar);
-        //set up button
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-
-        Button salvarExercicio = findViewById(R.id.buttonSalvar);
-        salvarExercicio.setOnClickListener(this);
-        dao = new ExercicioDAO(this);
     }
 
+    /**
+     * onCreateOptionsMenu
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
-        //set invisible menu item
+        //Set visibilidade dos itens de menu
         MenuItem pesquisar = menu.findItem(R.id.pesquisar);
         MenuItem novo = menu.findItem(R.id.novo);
         pesquisar.setVisible(false);
@@ -110,58 +109,96 @@ public class ExerciciosCasdastroActivity extends AppCompatActivity implements Vi
         return true;
     }
 
-    public void Salvar(View view){
+    /**
+     * Método salvar
+     * Valida e Salva exercício no banco de dados
+     * @param view the view
+     */
+    public void salvar(View view) {
         Exercicio exercicio = new Exercicio();
-        exercicio.setNome(nome.getText().toString());
-        exercicio.setDescricao(descricao.getText().toString());
 
-        if(repeticoes.isChecked()){
+        //Valida se o nome foi informado
+        if (nomeExercicio.getText().toString().trim().equals("")) {
+            nomeExercicio.requestFocus();
+            Toast.makeText(this, R.string.nome_nao_informado, Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        //Valida se a descricao foi informada
+        if (descricaoExercicio.getText().toString().trim().equals("")) {
+            descricaoExercicio.requestFocus();
+            Toast.makeText(this, R.string.descricao_nao_informada, Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        //Set nome do exercício
+        exercicio.setNome(nomeExercicio.getText().toString());
+
+        //Verifica se já existe exercício cadastrado com o mesmo nome
+        int nomeExercicioExistente = exercicioDAO.contarNome(exercicio);
+        if(nomeExercicioExistente > 0) {
+            if (acaoAlteracao) {
+                if (!exercicioEditado.getNome().toLowerCase().equals(exercicio.getNome().toLowerCase())) {
+                    Toast.makeText(this, R.string.nome_existente, Toast.LENGTH_LONG).show();
+                    return;
+                }
+            }else{
+                Toast.makeText(this, R.string.nome_existente, Toast.LENGTH_LONG).show();
+                return;
+            }
+        }
+
+        exercicio.setDescricao(descricaoExercicio.getText().toString());
+
+        if (repeticoes.isChecked()) {
             exercicio.setRepeticoes(EnumSimNao.SIM.getValor());
-        }else{
+        } else {
             exercicio.setRepeticoes(EnumSimNao.NAO.getValor());
         }
 
-        if(peso.isChecked()){
+        if (peso.isChecked()) {
             exercicio.setPeso(EnumSimNao.SIM.getValor());
-        }else{
+        } else {
             exercicio.setPeso(EnumSimNao.NAO.getValor());
         }
 
-        if(distancia.isChecked()){
+        if (distancia.isChecked()) {
             exercicio.setDistancia(EnumSimNao.SIM.getValor());
-        }else{
+        } else {
             exercicio.setDistancia(EnumSimNao.NAO.getValor());
         }
 
-        if(tempo.isChecked()){
+        if (tempo.isChecked()) {
             exercicio.setTempo(EnumSimNao.SIM.getValor());
-        }else{
+        } else {
             exercicio.setTempo(EnumSimNao.NAO.getValor());
         }
 
-        boolean registroSalvo = false;;
+        boolean registroSalvo = false;
 
-        if(!acaoAlteracao) {
-            registroSalvo = dao.inserir(exercicio);
-        }else {
+        //Se ação é alteração, realiza alteração
+        //Senão realiza inclusão do exercício
+        if (!acaoAlteracao) {
+            registroSalvo = exercicioDAO.inserir(exercicio);
+        } else {
             exercicio.setId(exercicioEditado.getId());
-            registroSalvo = dao.alterar(exercicio);
+            registroSalvo = exercicioDAO.alterar(exercicio);
         }
 
-        if(registroSalvo) {
-            Toast.makeText(this, "Registro salvo!", Toast.LENGTH_LONG).show();
-
-        }else{
-            Toast.makeText(this, "Erro ao salvar!", Toast.LENGTH_LONG).show();
+        if (registroSalvo) {
+            Toast.makeText(this, R.string.registro_salvo, Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, R.string.erro_salvar, Toast.LENGTH_LONG).show();
         }
 
-        if(acaoAlteracao) {
+        //Ação alteração, volta para tela de lista
+        if (acaoAlteracao) {
             Intent intent = null;
             intent = new Intent(this, ExerciciosListaActivity.class);
             startActivity(intent);
-        }else{
-            nome.setText("");
-            descricao.setText("");
+        } else {
+            nomeExercicio.setText("");
+            descricaoExercicio.setText("");
             repeticoes.setChecked(false);
             peso.setChecked(false);
             distancia.setChecked(false);
@@ -169,9 +206,13 @@ public class ExerciciosCasdastroActivity extends AppCompatActivity implements Vi
         }
     }
 
+    /**
+     * onClick
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         //Executa botão salvar
-        Salvar(v);
+        salvar(v);
     }
 }

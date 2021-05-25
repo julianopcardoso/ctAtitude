@@ -1,64 +1,110 @@
 package br.com.ctatitude.dao;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.ctatitude.db.DatabaseConnection;
 import br.com.ctatitude.model.Etapa;
+import br.com.ctatitude.model.Exercicio;
 import br.com.ctatitude.model.Treino;
 
+/**
+ * Classe TreinoDAO
+ */
 public class TreinoDAO {
-    private DatabaseConnection dbConnection;
-    private SQLiteDatabase db;
+    private final DatabaseConnection dbConnection;
+    private final SQLiteDatabase db;
 
+    /**
+     * Contrutor
+     * @param context
+     */
     public TreinoDAO(Context context) {
         dbConnection = new DatabaseConnection(context);
         db = dbConnection.getWritableDatabase();
     }
 
-    public boolean inserir(Treino treino) {
+    /**
+     * Inserir
+     * @param treino
+     * @return long
+     */
+    public long inserir(Treino treino) {
 
-        /*ContentValues values = new ContentValues();
-        values.put("NOME", exercicio.getNome().toString());
-        values.put("DESCRICAO", exercicio.getDescricao().toString());
-        values.put("PESO", exercicio.getPeso().toString());
-        values.put("REPETICAO", exercicio.getRepeticoes().toString());
-        values.put("DISTANCIA", exercicio.getDistancia().toString());
-        values.put("TEMPO", exercicio.getTempo().toString());
+        ContentValues values = new ContentValues();
+        values.put("NOME", treino.getNome());
+        values.put("ROUND", treino.getRound());
+        values.put("DESCANSO", treino.getDescanso());
+        values.put("DURACAO", treino.getDuracao());
 
-        return db.insert("EXERCICIO", null, values) > 0;*/
-        return true;
+        return db.insert("TREINO", null, values);
     }
 
+    /**
+     * Alterar
+     * @param treino
+     * @return boolean
+     */
     public boolean alterar(Treino treino) {
 
-        //return db.update("EXERCICIO", values, "ID=?", new String[]{String.valueOf(exercicio.getId())}) > 0;
-        return true;
+        ContentValues values = new ContentValues();
+        values.put("NOME", treino.getNome());
+        values.put("ROUND", treino.getRound());
+        values.put("DESCANSO", treino.getDescanso());
+        values.put("DURACAO", treino.getDuracao());
+
+        return db.update("TREINO", values, "ID=?", new String[]{String.valueOf(treino.getId())}) > 0;
     }
 
+    /**
+     * Excluir
+     * @param treino
+     * @return boolean
+     */
     public boolean excluir(Treino treino) {
-        //return db.delete("EXERCICIO", "ID=?", new String[]{String.valueOf(exercicio.getId())}) > 0;
-        return true;
+        return db.delete("TREINO", "ID=?", new String[]{String.valueOf(treino.getId())}) > 0;
     }
 
+    /**
+     * Contar
+     * @param treino
+     * @return int
+     */
+    public int contarNome(Treino treino){
+        int retorno;
+
+        String countQuery = "SELECT COUNT(*) FROM TREINO WHERE  LOWER(NOME)=?";
+        Cursor cursor = db.rawQuery(countQuery, new String[]{treino.getNome().toLowerCase()});
+        cursor.moveToNext();
+        retorno = cursor.getInt(0);
+
+        cursor.close();
+
+        return retorno;
+    }
+
+    /**
+     * Listar
+     * @return
+     */
     public List<Treino> listar() {
-        /*List<Etapa> etapas = new ArrayList<>();
-        Cursor cursor = db.query("EXERCICIO", new String[]{"ID", "NOME", "DESCRICAO", "PESO", "REPETICAO", "DISTANCIA", "TEMPO"},
+        List<Treino> treinos = new ArrayList<>();
+        Cursor cursor = db.query("TREINO", new String[]{"ID", "NOME", "ROUND", "DESCANSO", "DURACAO"},
                 null, null, null, null, "NOME");
         while (cursor.moveToNext()) {
-            Exercicio exercicio = new Exercicio();
-            exercicio.setId(cursor.getInt(0));
-            exercicio.setNome(cursor.getString(1));
-            exercicio.setDescricao(cursor.getString(2));
-            exercicio.setPeso(cursor.getString(3));
-            exercicio.setRepeticoes(cursor.getString(4));
-            exercicio.setDistancia(cursor.getString(5));
-            exercicio.setTempo(cursor.getString(6));
-            exercicios.add(exercicio);
+            Treino treino = new Treino();
+            treino.setId(cursor.getInt(0));
+            treino.setNome(cursor.getString(1));
+            treino.setRound(Integer.valueOf(cursor.getString(2)));
+            treino.setDescanso(Integer.valueOf(cursor.getString(3)));
+            treino.setDuracao(Integer.valueOf(cursor.getString(4)));
+            treinos.add(treino);
         }
-        return exercicios;*/
-        return null;
+        return treinos;
     }
 }
