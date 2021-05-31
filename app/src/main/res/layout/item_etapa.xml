@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardview_EtapaLista"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:showIn="@layout/activity_treinos_cadastro"
+    app:cardCornerRadius="4dp"
+    android:layout_margin="4dp"
+    android:elevation="50dp"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp" >
+
+    <TextView
+        android:id="@+id/textNomeEtapaLista"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/etapa"
+        android:textSize="24sp"
+        android:layout_alignParentLeft="true"
+        android:layout_toStartOf="@id/textNomeEtapaLista"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:layout_toLeftOf="@id/textNomeEtapaLista"
+        android:textStyle="bold"
+        />
+        <TextView
+            android:id="@+id/textOrdemEtapaLista"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/posicao_etapa"
+            android:textSize="24sp"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:layout_toRightOf="@id/textNomeEtapaLista"
+            android:textStyle="bold"
+            android:layout_marginLeft="16dp"
+            />
+        <TextView
+            android:id="@+id/textDuracaoEtapaLista"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/duracao"
+            android:textSize="20sp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/textNomeEtapaLista"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:layout_marginLeft="24dp"
+            />
+
+        <TextView
+            android:id="@+id/textTimerDuracaoEtapaLista"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/timer_inicial"
+            android:textSize="20sp"
+            android:layout_below="@id/textNomeEtapaLista"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@id/textDuracaoEtapaLista"
+            />
+
+        <TextView
+            android:id="@+id/textDescansoEtapaLista"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/descanso"
+            android:textSize="20sp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/textDuracaoEtapaLista"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:layout_marginLeft="24dp"
+            />
+
+        <TextView
+            android:id="@+id/textTimerDescansoEtapaLista"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/timer_inicial"
+            android:textSize="20sp"
+            android:layout_below="@id/textDuracaoEtapaLista"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:layout_alignStart="@id/textTimerDuracaoEtapaLista"
+            android:layout_alignLeft="@id/textTimerDuracaoEtapaLista" />
+
+        <TextView
+            android:id="@+id/textRoundsEtapaLista"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rounds"
+            android:textSize="20sp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/textDescansoEtapaLista"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:layout_marginLeft="24dp"
+            />
+
+        <TextView
+            android:id="@+id/textValorRoundsEtapaLista"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/valor_round"
+            android:textSize="20sp"
+            android:layout_below="@id/textDescansoEtapaLista"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:layout_alignStart="@id/textTimerDuracaoEtapaLista"
+            android:layout_alignLeft="@id/textTimerDuracaoEtapaLista" />
+
+        <ImageButton
+            android:id="@+id/editEtapaItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_toLeftOf="@id/deleteEtapaItem"
+            android:layout_marginRight="24dp"
+            android:layout_toStartOf="@id/deleteEtapaItem"
+            android:layout_marginEnd="24dp"
+            android:src="@drawable/ic_edit"
+            android:background="@drawable/selectable_button_bg"
+            />
+    <ImageButton
+        android:id="@+id/deleteEtapaItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_delete"
+        android:background="@drawable/selectable_button_bg"
+        android:tint="@color/redblack" />/>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

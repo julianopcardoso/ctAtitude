@@ -1,0 +1,80 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutTimer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginTop="24dp">
+
+        <NumberPicker
+            android:id="@+id/numberPickerMinute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+
+            android:scaleX="1.3"
+            android:scaleY="1.3"
+            />
+
+        <TextView
+            android:id="@+id/editTextMinutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="80dp"
+            android:layout_toRightOf="@id/numberPickerMinute"
+            android:text="@string/min"
+            />
+
+        <NumberPicker
+            android:id="@+id/numberPickerSeconds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="24dp"
+            android:layout_toRightOf="@+id/editTextMinutes"
+            android:scaleX="1.3"
+            android:scaleY="1.3"/>
+
+        <TextView
+            android:id="@+id/editTextSeconds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="80dp"
+            android:layout_toRightOf="@id/numberPickerSeconds"
+            android:text="@string/sec"
+
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayouButtons"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/relativeLayoutTimer"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/buttonSelecionar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:text="@string/selecionar"
+            android:layout_marginTop="32dp"/>
+
+        <Button
+            android:id="@+id/buttonCancelar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@id/buttonSelecionar"
+            android:text="@string/cancelar"
+            android:layout_marginTop="32dp"/>
+    </RelativeLayout>
+
+</RelativeLayout>

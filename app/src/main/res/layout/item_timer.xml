@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardview_TimersLista"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:showIn="@layout/activity_timers_lista"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:id="@+id/textNomeTreinoTimerLista"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="@string/treinos"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textDuracaoTreinoTimerLista"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textNomeTreinoTimerLista"
+            android:layout_alignParentLeft="true"
+            android:singleLine="true"
+            android:text="@string/duracao"
+            android:textSize="16sp" />
+7
+        <TextView
+            android:id="@+id/textTimerTreinoTimerLista"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textNomeTreinoTimerLista"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/textDuracaoTreinoTimerLista"
+            android:singleLine="true"
+            android:text="@string/timer_inicial"
+            android:textSize="16sp" />
+
+
+        <ImageButton
+            android:id="@+id/playTreinoTimerItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/selectable_button_bg"
+            android:src="@drawable/ic_play_circle"
+            android:scaleX="2"
+            android:scaleY="2"
+            android:tint="@color/green_ct"/>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

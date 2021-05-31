@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="javadoc" pattern="![CT_Atitude.app]:br.com.ctatitude.BuildConfig" />
+</component>

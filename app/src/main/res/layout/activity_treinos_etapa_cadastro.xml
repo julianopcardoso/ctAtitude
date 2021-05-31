@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.MainActivity">
+
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:gravity="top"
+            android:id="@+id/textNomeEtapa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/etapa"
+            android:textSize="24sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold" />
+        <TextView
+            android:gravity="top"
+            android:id="@+id/textEtapa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/posicao_etapa"
+            android:textSize="24sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="80dp"
+            android:layout_toRightOf="@id/textNomeEtapa"
+            android:textStyle="bold" />
+
+        <TextView
+            android:gravity="top"
+            android:id="@+id/textDuracaoEtapa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/duracao"
+            android:layout_below="@id/textNomeEtapa"
+            android:textSize="24sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold" />
+        <EditText
+            android:inputType="text"
+            android:id="@+id/editTextDuracaoEtapa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/duracao_inicial"
+            android:text="@string/duracao_inicial"
+            android:layout_alignStart="@id/editTextDescansoEtapa"
+            android:layout_below="@id/textNomeEtapa"
+            android:maxLength="05"
+            android:gravity="top|left"
+            tools:ignore="RtlHardcoded"
+            android:background="@drawable/selectable_edittext_bg"
+            android:layout_marginTop="16dp"
+            android:padding="5dp"
+            android:layout_toEndOf="@id/textDuracaoEtapa"
+            android:layout_toRightOf="@id/textDuracaoEtapa"
+            android:focusable="false"
+            android:layout_alignLeft="@id/editTextDescansoEtapa" />
+
+        <TextView
+            android:gravity="top"
+            android:id="@+id/textDescansoEtapa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/descanso"
+            android:layout_below="@id/editTextDuracaoEtapa"
+            android:textSize="24sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold" />
+        <EditText
+            android:inputType="text"
+            android:id="@+id/editTextDescansoEtapa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/duracao_inicial"
+            android:text="@string/duracao_inicial"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_below="@id/textDuracaoEtapa"
+            android:maxLength="05"
+            android:gravity="top|left"
+            tools:ignore="RtlHardcoded"
+            android:background="@drawable/selectable_edittext_bg"
+            android:layout_marginTop="16dp"
+            android:padding="5dp"
+            android:layout_toEndOf="@id/textDescansoEtapa"
+            android:layout_toRightOf="@id/textDescansoEtapa"
+            android:focusable="false"
+            />
+
+
+        <TextView
+            android:gravity="top"
+            android:id="@+id/textRoundsEtapa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rounds"
+            android:layout_below="@id/textDescansoEtapa"
+            android:textSize="24sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold"/>
+
+        <ImageButton
+            android:gravity="top"
+            android:id="@+id/imageButtonMinus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/textRoundsEtapa"
+            android:layout_below="@id/textDescansoEtapa"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_remove_circle"
+            android:layout_toRightOf="@id/textRoundsEtapa"
+            android:background="@drawable/selectable_button_bg"
+            android:layout_centerHorizontal="true"
+            tools:ignore="UnknownId" />
+
+        <EditText
+            android:inputType="number"
+            android:id="@+id/editTextRoundsEtapa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/valor_round"
+            android:layout_below="@id/textDescansoEtapa"
+            android:layout_toRightOf="@id/imageButtonMinus"
+            android:maxLength="02"
+            android:textSize="18sp"
+            android:gravity="top|left"
+            tools:ignore="RtlHardcoded"
+            android:background="@drawable/edittext_bg"
+            android:padding="5dp"
+            android:layout_marginTop="12dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:layout_alignStart="@id/editTextDescansoEtapa"
+            android:layout_alignLeft="@id/editTextDescansoEtapa" />
+
+        <ImageButton
+            android:gravity="top"
+            android:id="@+id/imageButtonPlus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/editTextRoundsEtapa"
+            android:layout_below="@id/textDescansoEtapa"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_add_circle"
+            android:layout_toRightOf="@id/editTextRoundsEtapa"
+            android:background="@drawable/selectable_button_bg"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="5dp"/>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_exercicios"
+            android:layout_below="@id/textRoundsEtapa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_exercicio_etapa"
+            tools:itemCount="4"
+            android:layout_marginTop="16dp"
+            />
+        <Button
+            android:id="@+id/buttonAdicionarExercicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textDescansoEtapa"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+            android:layout_marginTop="5dp"
+            android:layout_alignParentRight="true"
+            android:text="@string/adicionar_exercicio"
+            app:icon="@drawable/ic_add_circle"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp" />
+
+        <Button
+            android:id="@+id/buttonAdicionarEtapa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/adicionar"
+            android:backgroundTint="@color/green_ct"
+            android:layout_marginTop="42dp"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+</RelativeLayout>

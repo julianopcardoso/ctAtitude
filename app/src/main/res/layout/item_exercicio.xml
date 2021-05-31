@@ -18,6 +18,7 @@
         android:layout_marginBottom="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginLeft="16dp">
+
     <TextView
         android:id="@+id/textNomeExercicioLista"
         android:layout_width="wrap_content"
@@ -40,7 +41,9 @@
             android:layout_marginRight="24dp"
             android:layout_toStartOf="@id/deleteExercicioItem"
             android:layout_marginEnd="24dp"
-            android:background="@drawable/ic_edit"/>
+            android:src="@drawable/ic_edit"
+            android:background="@drawable/selectable_button_bg"
+            />
     <ImageButton
         android:id="@+id/deleteExercicioItem"
         android:layout_width="wrap_content"
@@ -49,6 +52,8 @@
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:background="@drawable/ic_delete"/>
+        android:src="@drawable/ic_delete"
+        android:background="@drawable/selectable_button_bg"
+        android:tint="@color/redblack" />/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

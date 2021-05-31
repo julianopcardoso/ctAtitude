@@ -5,14 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.MainActivity"
-
+    tools:showIn="@layout/activity_main"
     >
-
-
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,7 +20,6 @@
             ></LinearLayout>
 
         <ImageView
-
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_centerHorizontal="true"
