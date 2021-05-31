@@ -212,10 +212,10 @@ public class TreinosCasdastroActivity extends AppCompatActivity implements View.
             return;
         }
 
+        registroSalvo = true;
         //Insere ou altera treino
         if (!acaoAlteracao) {
             idTreino = (int) treinoDAO.inserir(treino);
-
         } else {
             idTreino = treino.getId();
             treinoDAO.alterar(treino);
@@ -247,8 +247,6 @@ public class TreinosCasdastroActivity extends AppCompatActivity implements View.
                 exercicioEtapaDAO.inserir(treino.getEtapasTreinos().get(i).getEtapa().getExerciciosEtapa().get(j));
             }
         }
-
-        registroSalvo = true;
 
         if (registroSalvo) {
             Toast.makeText(this, R.string.registro_salvo, Toast.LENGTH_LONG).show();

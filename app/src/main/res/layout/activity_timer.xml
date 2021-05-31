@@ -33,23 +33,24 @@
             android:text="@string/duracao_total"
             android:textSize="16sp" />
 
-        <Chronometer
-            android:id="@+id/chronometerTimerRound"
+        <TextView
+            android:id="@+id/textViewCronometro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textTimerDuracaoTotal"
             android:layout_centerHorizontal="true"
             android:fontFamily="@font/coda"
-            android:format="@string/timer_inicial"
+            android:text="@string/timer_inicial"
             android:gravity="top"
             android:textSize="75sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/textTimerDuracaoRound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/chronometerTimerRound"
+            android:layout_below="@id/textViewCronometro"
             android:layout_centerHorizontal="true"
             android:text="@string/duracao_round"
             android:textSize="12sp" />
@@ -110,7 +111,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/relativeLayoutTimerControls"
-            android:gravity="center|top">
+            android:gravity="center|top"
+            android:layout_marginTop="-26dp">
 
             <TextView
                 android:id="@+id/textRoundTreino"
@@ -130,6 +132,28 @@
                 android:text="@string/contador_round_treino"
                 android:textSize="28sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textDuracaoDescansoTreino"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/descanso"
+                android:textSize="18sp"
+                android:layout_marginTop="32dp"
+                android:layout_marginLeft="24dp"
+                android:layout_below="@id/textContadorRoundTreino"/>
+
+            <TextView
+                android:id="@+id/textValorDuracaoDescansoTreino"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@id/textDuracaoDescansoTreino"
+                android:text="@string/duracao_inicial"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="32dp"
+                android:layout_below="@id/textContadorRoundTreino"/>
         </RelativeLayout>
 
         <androidx.cardview.widget.CardView

@@ -44,7 +44,6 @@ import br.com.ctatitude.utils.Utils;
  */
 public class TimerActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Chronometer chronometer;
     private CountDownTimer countDownTimer;
     private TextView countDown;
     private MediaPlayer player;
@@ -55,6 +54,8 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     private TextView contadorRoundEtapa;
     private TextView valorDurcaoEtapa;
     private TextView valorDescansoEtapa;
+    private TextView duracaoTotalTreino;
+    private TextView duracaoDescansoTreino;
     private ImageButton buttonPlay;
     private ImageButton buttonPause;
     private ImageButton buttonStop;
@@ -64,12 +65,12 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
     private boolean novoRoundEtapa;
     private boolean running;
-    private boolean ultimoRoundTreino;
     private boolean workStart;
     private boolean inicioTreino;
 
-    private long pauseOffset = 1000;
     private long timeLeftInMillis = 6000;
+
+    private Integer cronometro;
 
     private Integer totalRoundsTreino;
     private Integer totalRoundsEtapa;
@@ -94,7 +95,6 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        chronometer.stop();
         countDownTimer.cancel();
         player.stop();
         player.release();
@@ -102,6 +102,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
     /**
      * onCreate
+     *
      * @param savedInstanceState
      */
     @Override
@@ -118,8 +119,9 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         ab.setDisplayHomeAsUpEnabled(true);
 
         //Set views
+        duracaoDescansoTreino = findViewById(R.id.textValorDuracaoDescansoTreino);
+        duracaoTotalTreino = findViewById(R.id.textViewCronometro);
         countDown = findViewById(R.id.textCounterDown);
-        chronometer = findViewById(R.id.chronometerTimerRound);
         nomeTreinoTimer = findViewById(R.id.textNomeTreinoTimer);
         contadorRoundTreino = findViewById(R.id.textContadorRoundTreino);
         nomeEtapaRound = findViewById(R.id.textNomeEtapaTimer);
@@ -143,12 +145,6 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onClick(View view) {
                 collapseExpandDetalhesEtapa();
-            }
-        });
-        chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
-            @Override
-            public void onChronometerTick(Chronometer cArg) {
-                marcacaoChronometer(cArg);
             }
         });
 
@@ -183,16 +179,8 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         }
 
         //Realiza a abertura do Timer
+        workStart = true;
         aberturaTimer();
-    }
-
-    /**
-     * Método marcacaoChronometer
-     * @param cArg
-     */
-    private void marcacaoChronometer(Chronometer cArg) {
-        Integer time = (int) ((SystemClock.elapsedRealtime() - cArg.getBase()) / 1000);
-        cArg.setText(Utils.convertSecondsToHoursMinutesSeconds(time));
     }
 
     /**
@@ -218,6 +206,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
      */
     private void atribuiValoresIniciais() {
         nomeTreinoTimer.setText(treino.getNome());
+        duracaoDescansoTreino.setText(Utils.convertSecondsToMinutesSeconds(treino.getDescanso()));
         roundAtualTreino = 1;
         totalEtapas = treino.getEtapasTreinos().size();
         totalRoundsTreino = treino.getRound();
@@ -238,7 +227,9 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.textTimerDuracaoRound).setVisibility(View.INVISIBLE);
         findViewById(R.id.textTimerDuracaoTotal).setVisibility(View.INVISIBLE);
         findViewById(R.id.textRoundTreino).setVisibility(View.INVISIBLE);
-        chronometer.setVisibility(View.INVISIBLE);
+        findViewById(R.id.textDuracaoDescansoTreino).setVisibility(View.INVISIBLE);
+        duracaoDescansoTreino.setVisibility(View.INVISIBLE);
+        duracaoTotalTreino.setVisibility(View.INVISIBLE);
         contadorRoundTreino.setVisibility(View.INVISIBLE);
         buttonPlay.setVisibility(View.INVISIBLE);
         buttonPause.setVisibility(View.INVISIBLE);
@@ -255,31 +246,35 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             public void onTick(long millisUntilFinished) {
                 timeLeftInMillis = millisUntilFinished;
                 long seconds = (timeLeftInMillis / 1000) % 60;
-                switch ((int) seconds) {
-                    case 3:
-                        countDown.setTextColor(getResources().getColor(R.color.red));
-                        player.release();
-                        player = MediaPlayer.create(TimerActivity.this, R.raw.three);
-                        player.start();
-                        break;
-                    case 2:
-                        player.release();
-                        player = MediaPlayer.create(TimerActivity.this, R.raw.two);
-                        player.start();
-                        break;
-                    case 1:
-                        player.release();
-                        player = MediaPlayer.create(TimerActivity.this, R.raw.one);
-                        player.start();
-                        break;
-                    case 0:
-                        player.release();
-                        player = MediaPlayer.create(TimerActivity.this, R.raw.work);
-                        player.start();
-                        workStart = true;
-                        countDown.setTextColor(getResources().getColor(R.color.black));
-                        countDown.setText(R.string.work);
-                        break;
+                if (workStart) {
+                    switch ((int) seconds) {
+                        case 3:
+                            countDown.setTextColor(getResources().getColor(R.color.red));
+                            player.release();
+                            player = MediaPlayer.create(TimerActivity.this, R.raw.three);
+                            player.start();
+                            break;
+                        case 2:
+                            player.release();
+                            player = MediaPlayer.create(TimerActivity.this, R.raw.two);
+                            player.start();
+                            break;
+                        case 1:
+                            player.release();
+                            player = MediaPlayer.create(TimerActivity.this, R.raw.one);
+                            player.start();
+                            break;
+                        case 0:
+                            if (workStart) {
+                                player.release();
+                                player = MediaPlayer.create(TimerActivity.this, R.raw.work);
+                                player.start();
+                                countDown.setTextColor(getResources().getColor(R.color.black));
+                                countDown.setText(R.string.work);
+                                workStart = false;
+                            }
+                            break;
+                    }
                 }
                 if ((int) seconds > 0) {
                     updateCountDownText();
@@ -290,20 +285,23 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             public void onFinish() {
                 countDownTimer.cancel();
                 running = true;
+                workStart = true;
+                cronometro = 0;
                 //Set campos visíveis
+                duracaoTotalTreino.setVisibility(View.VISIBLE);
                 findViewById(R.id.textTimerDuracaoRound).setVisibility(View.VISIBLE);
                 findViewById(R.id.textTimerDuracaoTotal).setVisibility(View.VISIBLE);
                 findViewById(R.id.textRoundTreino).setVisibility(View.VISIBLE);
                 countDown.setTextSize(24);
-                chronometer.setVisibility(View.VISIBLE);
+                findViewById(R.id.textDuracaoDescansoTreino).setVisibility(View.VISIBLE);
+
+                duracaoDescansoTreino.setVisibility(View.VISIBLE);
                 contadorRoundTreino.setVisibility(View.VISIBLE);
                 buttonPlay.setVisibility(View.VISIBLE);
                 buttonPause.setVisibility(View.VISIBLE);
                 buttonStop.setVisibility(View.VISIBLE);
                 cardViewEtapaAtual.setVisibility(View.VISIBLE);
 
-                chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
-                chronometer.start();
                 defineTimerTreino();
             }
         }.start();
@@ -313,7 +311,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
      * Método atualizaEtapa[
      */
     private void atualizaEtapa() {
-        nomeEtapaRound.setText(String.format("%s %d", getResources().getString(R.string.etapa), treino.getEtapasTreinos().get(etapaAtual - 1).getOrdem()));
+        nomeEtapaRound.setText(String.format("%s %d/%d", getResources().getString(R.string.etapa), treino.getEtapasTreinos().get(etapaAtual - 1).getOrdem(),treino.getEtapasTreinos().size()));
         contadorRoundEtapa.setText(String.format("%02d/%02d", roundAtualEtapa, treino.getEtapasTreinos().get(etapaAtual - 1).getEtapa().getRound()));
         valorDurcaoEtapa.setText(Utils.convertSecondsToMinutesSeconds(treino.getEtapasTreinos().get(etapaAtual - 1).getEtapa().getDuracao()));
         valorDescansoEtapa.setText(Utils.convertSecondsToMinutesSeconds(treino.getEtapasTreinos().get(etapaAtual - 1).getEtapa().getDescanso()));
@@ -323,6 +321,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
     /**
      * onClick
+     *
      * @param v
      */
     @Override
@@ -348,9 +347,6 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             if (etapaAtual > totalEtapas) {
                 etapaAtual = 1;
                 roundAtualTreino += 1;
-                if (roundAtualTreino > totalRoundsTreino) {
-                    ultimoRoundTreino = true;
-                }
 
                 if (treino.getDescanso() > 0) {
                     //Descanso do treino
@@ -358,6 +354,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
                     player = MediaPlayer.create(TimerActivity.this, R.raw.rest);
                     player.start();
 
+                    cronometro -= 2;
                     countDownTimer.onTick((treino.getDescanso() + 1) * 1000);
                     executaTimerTreino();
                 } else {
@@ -369,17 +366,11 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
                     novoRoundEtapa = false;
                     if (treino.getEtapasTreinos().get(etapaAtual - 1).getEtapa().getDescanso() > 0) {
 
-                        if (roundAtualTreino.equals(totalRoundsTreino) &&
-                                (treino.getDescanso().equals(0)) &&
-                                totalRoundsEtapa.equals(roundAtualEtapa - 1)
-                        ) {
-                            ultimoRoundTreino = true;
-                        }
-
                         //Descanso da etapa
                         player.release();
                         player = MediaPlayer.create(TimerActivity.this, R.raw.rest);
                         player.start();
+                        cronometro -= 2;
                         countDownTimer.onTick((treino.getEtapasTreinos().get(etapaAtual - 1).getEtapa().getDescanso() + 1) * 1000);
                         executaTimerTreino();
                     } else {
@@ -395,14 +386,6 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
                         defineTimerTreino();
 
                     } else {
-                        //último round do treino
-                        if ((etapaAtual.equals(totalEtapas)) &&
-                                (roundAtualTreino.equals(totalRoundsTreino)) &&
-                                (roundAtualEtapa.equals(totalRoundsEtapa)) &&
-                                (treino.getDescanso().equals(0)) &&
-                                (treino.getEtapasTreinos().get(etapaAtual - 1).getEtapa().getDescanso().equals(0))) {
-                            ultimoRoundTreino = true;
-                        }
                         atualizaEtapa();
                         roundAtualEtapa += 1;
                         novoRoundEtapa = true;
@@ -411,9 +394,12 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
                             player.release();
                             player = MediaPlayer.create(TimerActivity.this, R.raw.work);
                             player.start();
+                            cronometro -= 2;
                         } else {
                             workStart = false;
+                            cronometro -= 1;
                         }
+
                         countDownTimer.onTick((treino.getEtapasTreinos().get(etapaAtual - 1).getEtapa().getDuracao() + 1) * 1000);
                         executaTimerTreino();
                     }
@@ -425,14 +411,10 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             player.start();
 
             countDownTimer.cancel();
-            chronometer.stop();
-            chronometer.setBase(SystemClock.elapsedRealtime());
-            pauseOffset = 1000;
             timeLeftInMillis = 0;
             running = false;
             inicioTreino = true;
             novoRoundEtapa = false;
-            ultimoRoundTreino = false;
             workStart = false;
 
             atribuiValoresIniciais();
@@ -449,33 +431,39 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onTick(long millisUntilFinished) {
                 timeLeftInMillis = millisUntilFinished;
+                long hours = (timeLeftInMillis / 1000) / 3600;
+                long minutes = ((timeLeftInMillis / 1000) / 60) % 60;
                 long seconds = (timeLeftInMillis / 1000) % 60;
-                switch ((int) seconds) {
-                    case 3:
-                        countDown.setTextColor(getResources().getColor(R.color.red));
-                        player.release();
-                        player = MediaPlayer.create(TimerActivity.this, R.raw.three);
-                        player.start();
-                        break;
-                    case 2:
-                        player.release();
-                        player = MediaPlayer.create(TimerActivity.this, R.raw.two);
-                        player.start();
 
-                        break;
-                    case 1:
-                        player.release();
-                        player = MediaPlayer.create(TimerActivity.this, R.raw.one);
-                        player.start();
-                        if (ultimoRoundTreino) {
-                            chronometer.stop();
-                        }
-                        break;
-                    case 0:
-                        countDownTimer.onFinish();
-                        break;
+                cronometro += 1;
+
+                if (hours == 0 && minutes == 0) {
+                    switch ((int) seconds) {
+                        case 3:
+                            countDown.setTextColor(getResources().getColor(R.color.red));
+                            player.release();
+                            player = MediaPlayer.create(TimerActivity.this, R.raw.three);
+                            player.start();
+                            break;
+                        case 2:
+                            player.release();
+                            player = MediaPlayer.create(TimerActivity.this, R.raw.two);
+                            player.start();
+
+                            break;
+                        case 1:
+                            player.release();
+                            player = MediaPlayer.create(TimerActivity.this, R.raw.one);
+                            player.start();
+                            break;
+                        case 0:
+                            duracaoTotalTreino.setText(Utils.convertSecondsToHoursMinutesSeconds(cronometro));
+                            onFinish();
+                            break;
+                    }
                 }
                 updateCountDownText();
+                duracaoTotalTreino.setText(Utils.convertSecondsToHoursMinutesSeconds(cronometro));
             }
 
             @Override
@@ -490,6 +478,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
     /**
      * onCreateOptionsMenu
+     *
      * @param menu
      * @return
      */
@@ -526,9 +515,8 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
                 inicioTreino = false;
                 aberturaTimer();
             } else {
+                cronometro -= 1;
                 executaTimerTreino();
-                chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
-                chronometer.start();
                 running = true;
             }
         }
@@ -541,8 +529,6 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     private void pause() {
         if (running) {
             countDownTimer.cancel();
-            chronometer.stop();
-            pauseOffset = SystemClock.elapsedRealtime() - chronometer.getBase();
             running = false;
         }
     }
@@ -554,16 +540,12 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     private void stop() {
         player.release();
         countDownTimer.cancel();
-        chronometer.stop();
-
-        chronometer.setBase(SystemClock.elapsedRealtime());
-        pauseOffset = 1000;
+        cronometro = 0;
         timeLeftInMillis = 0;
         running = false;
         inicioTreino = true;
         novoRoundEtapa = false;
-        ultimoRoundTreino = false;
-        workStart = false;
+        workStart = true;
 
         atribuiValoresIniciais();
         atualizaEtapa();
