@@ -217,6 +217,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         countDown.setTextColor(Color.parseColor("#000000"));
         scrollDetalheEtapa.setVisibility(View.GONE);
         buttonExpand.setImageResource(R.drawable.ic_expand_more);
+        duracaoTotalTreino.setText(Utils.convertSecondsToHoursMinutesSeconds(0));
     }
 
     /**

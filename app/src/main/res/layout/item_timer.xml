@@ -26,7 +26,10 @@
             android:ellipsize="marquee"
             android:singleLine="true"
             android:text="@string/treinos"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:layout_marginRight="15dp"
+            android:layout_toStartOf="@id/playTreinoTimerItem"
+            android:layout_toLeftOf="@id/playTreinoTimerItem" />
 
         <TextView
             android:id="@+id/textDuracaoTreinoTimerLista"

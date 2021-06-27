@@ -26,6 +26,9 @@
             android:ellipsize="marquee"
             android:singleLine="true"
             android:text="@string/treinos"
+            android:layout_marginRight="10dp"
+            android:layout_toStartOf="@id/editTreinoItem"
+            android:layout_toLeftOf="@id/editTreinoItem"
             android:textSize="24sp"
             />
 
